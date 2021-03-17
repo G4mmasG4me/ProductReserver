@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+#container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+#sidepanel {
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  height: 100%;;
+  background-color: grey;
+  transition: width 0.5s ease-in-out;
+}
+
+#topside {
+  display: flex;
+  justify-content: center;
+}
+
+#lefttop {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+#righttop {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+#sidepanelbutton {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  outline: none;
+  border: none;
+}
+
+#profilebutton {
+  position: relative;
+  height: 50px;
+  width: 0px;
+  outline: none;
+  border: none;
+  transition: width 0.5s;
+  background: none;
+}
+
+#profileimg {
+  width: 0px;
+  height: 50px;
+  border-radius: 25px;
+  transition: width 0.5s;
+  vertical-align: middle;
+}
+
+#sidepanellinks {
+  display: flex;
+  flex-direction: column;
+}
+
+#sidepanellinks button {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  border: none;
+  display: none;
+  background-color: grey;
+  transition: width 0.5s;
+}
+
+#sidepanellinks button:hover {
+  background-color: lightgrey;
+}
+
+#maincontent {
+  width: 100%;
+  height: 100%;
+  background-color: lightgrey;
+}
+
+#maincontent > div {
+  height: 100%;
+  width: 100%;
+}
+
+#page1 {
+  display: block;
+  background-color: red;
+}
+#page2 {
+  display: none;
+  background-color: blue;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#innerpage {
+  width: 80%;
+  height: 80%;
+}
+#topbar button {
+  height: 50px;
+  width: 100px;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+#add-content {
+  display: block;
+}
+
+#edit-content {
+  display: none;
+}
+
+#addproductsubmit {
+  width: 50px;
+  align-self: flex-end;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+table, td, th {
+  border: 2px solid black;
+}
+table input {
+  width: 100%;
+  box-sizing: border-box;
+}

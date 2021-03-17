@@ -1,0 +1,6 @@
+scroll jacking, which takes you to the next part of the page when you scroll
+scroll snapping same thing
+
+for each "section" of the page, it has the be the height and width of inner display size. The background image stays the same size as inner display but without aspect ratio changing, so parts of the image will get cut off.
+each "section" has to be the size of the viewport
+https://css-tricks.com/practical-css-scroll-snapping/

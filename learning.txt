@@ -1,0 +1,38 @@
+display types:
+
+block:
+  take full-width
+  each gets displayed in new line
+  width & height can be set
+  can contain other block or inline elements
+
+inline:
+  takes only as much space as they need
+  displayed side to side
+  don't accept width or height, and top-bottom margin
+  can contain other inline elements
+
+inline-block:
+  takes only as much space as they need
+  dispayed side to side
+  width & height can bet set
+  doesn't work with float
+
+
+content - the content of the box, where text and images appear
+padding - clears an area around the content. The padding is transparent
+Border - a border that goes around the padding and content
+Margin - clears an area outside the border. The margin is transparent
+
+
+positions
+
+static:
+
+relative
+
+fixed - positied relative to viewport, stays in same place even if scrolled.
+
+asbsolute - positied relative to nearest positied ancestor, if no ancestors then uses document body.
+
+sticky - toggles between relative and fixed depending on scroll position.

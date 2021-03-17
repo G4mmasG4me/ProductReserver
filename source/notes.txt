@@ -1,0 +1,4 @@
+image protocol
+on new product made, a folder is created in images, folder name is equal to the product id
+each image inside that folder is numbered, eg. 1.png, 2.png, 3.png
+the first image is the one that's show on the front page.
