@@ -2,6 +2,10 @@
 
 require 'config.php';
 
+if(!isset($_GET['id'])) {
+    header('Location: products.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +48,16 @@ require 'config.php';
             </header>
             <div id="main">
                 <div id="imagesection">
-                    <img src="https://via.placeholder.com/480">
+                    <div id="mainimagesection">
+                        <button>Left</button>
+                        <img id="mainimage" src="https://via.placeholder.com/480">
+                        <button>Right</button>
+                    </div>
+                    <div id="thumbnails">
+                        <img src="https://via.placeholder.com/48">
+                        <img src="https://via.placeholder.com/48">
+                        <img src="https://via.placeholder.com/48">
+                    </div>
 
                 </div>
                 <div id="productsection">

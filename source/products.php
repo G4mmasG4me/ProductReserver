@@ -41,7 +41,7 @@ if(isset($_GET['num_results'])) {
   }
 }
 
-if(!empty($_GET['search'])) {
+if(isset($_GET['search'])) {
   $searchq = $_GET['search'];
   $sql = 'SELECT * FROM products WHERE name LIKE ' . '"%' . $searchq . '%" ' . $filter;
   $query = mysqli_query($conn, $sql);
