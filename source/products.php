@@ -57,9 +57,9 @@ if(isset($_GET['search'])) {
       $price = $row['price'];
       $description = $row['description'];
       #$manufacturer = $row['manufacturer'];
-      #$id = $row['id'];
+      $id = $row['id'];
       #$image = 'images/' . $id . '.png';
-      $output .= '<a href="" id="product"><div id="imgcontainer"><img src="https://via.placeholder.com/160x160?text=Product+Image"></div><div id="productinfo"><h1 id="productname">'.$name.'</h1><p id="productprice">£'.$price.'</p><p id="productdescription">'.$description.'</p></div></a>';
+      $output .= '<a href="product.php?id='.$id.'" id="product"><div id="imgcontainer"><img src="https://via.placeholder.com/160x160?text=Product+Image"></div><div id="productinfo"><h1 id="productname">'.$name.'</h1><p id="productprice">£'.$price.'</p><p id="productdescription">'.$description.'</p></div></a>';
       $_SESSION['output'] = $output;
     }
   }
@@ -72,9 +72,9 @@ else {
     $price = $row['price'];
     $description = $row['description'];
     #$manufacturer = $row['manufacturer'];
-    #$id = $row['id'];
+    $id = $row['id'];
     #$image = 'image/' . $id . '.png';
-    $output .= '<a href="" id="product"><div id="imgcontainer"><img src="https://via.placeholder.com/160x160?text=Product+Image"></div><div id="productinfo"><h1 id="productname">'.$name.'</h1><p id="productprice">£'.$price.'</p><p id="productdescription">'.$description.'</p></div></a>';
+    $output .= '<a href="product.php?id='.$id.'" id="product"><div id="imgcontainer"><img src="https://via.placeholder.com/160x160?text=Product+Image"></div><div id="productinfo"><h1 id="productname">'.$name.'</h1><p id="productprice">£'.$price.'</p><p id="productdescription">'.$description.'</p></div></a>';
     $_SESSION['output'] = $output;
   }
 }

@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container {
+  width: 25%;
+  height: 50%;
+  background-color: lightgrey;
+  box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.4);
+  border-radius: 4px;
+
+}
+
+#loginform {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginform input[type='text'] {
+  width: 256px;
+  height: 32px;
+  margin: 8px;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+#loginform input[type='submit'] {
+  width: 256px;
+  height: 32px;
+  margin: 8px;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+
+#loginform p {
+  color: red;
+}

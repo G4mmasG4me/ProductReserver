@@ -12,7 +12,7 @@ if (isset($_POST['addproductsubmit'])) {
     $price = $_POST['price'];
     $link = $_POST['link'];
 
-    $sql = "INSERT INTO products (name, description, colour, size, category, brand, price, link) VALUES ('" . $name . "', '" . $description . "', '" . $colour . "', '" . $size . "', '" . $category . "', '" . $brand . "', '" . $price . "', '" . $link . "')";
+    $sql = "INSERT INTO products (name, description, colour, size, category, brand, price, link, dateadded) VALUES ('" . $name . "', '" . $description . "', '" . $colour . "', '" . $size . "', '" . $category . "', '" . $brand . "', '" . $price . "', '" . $link . "', '" . date('Y-m-d H:i:s') . "')";
     mysqli_query($conn, $sql);
     $id = mysqli_insert_id($conn);
     $targetdir = dirname(dirname(__FILE__)) . '/images/' . $id . '/';
@@ -23,7 +23,7 @@ if (isset($_POST['addproductsubmit'])) {
         $newfile = $targetdir . $i . '.' . $extension;
         move_uploaded_file($tempfile, $newfile);
     }
-    
+
 }
 
 

@@ -10,8 +10,8 @@
         <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
       </ul>
       <ul class="navbar-nav w-100 justify-content-end align-items-center">
-        <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+        <li class="nav-item"><a class="nav-link" href="signin.php">Sign In</a></li>
+        <li class="nav-item"><a class="nav-link" href="signup.php">Sign Up</a></li>
       </ul>
   </nav>
 </header>
