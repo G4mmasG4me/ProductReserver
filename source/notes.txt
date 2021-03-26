@@ -2,3 +2,9 @@ image protocol
 on new product made, a folder is created in images, folder name is equal to the product id
 each image inside that folder is numbered, eg. 1.png, 2.png, 3.png
 the first image is the one that's show on the front page.
+
+enter name, email, password
+saves that data to temporary database, gets assigned a key or ID && sends email with verification digits.
+Takes them to verification page, with get parameter of that key or ID.
+Uses that get parameter to show data.
+Once user has enter the correct verification code, it uses the get parameter value to verify the record that the ID/key belongs to.

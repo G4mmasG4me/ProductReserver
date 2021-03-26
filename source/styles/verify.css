@@ -23,7 +23,7 @@ body {
 
 }
 
-#loginform {
+#codeform {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -31,7 +31,7 @@ body {
   align-items: center;
 }
 
-#loginform input {
+#codeform input {
   width: 256px;
   height: 32px;
   margin: 8px;
@@ -40,7 +40,14 @@ body {
   padding: 8px;
 }
 
+#codeform input[type='text'] {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+}
 
-#loginform p {
+
+#codeform p {
   color: red;
+  max-width: 64%;
 }

@@ -24,7 +24,7 @@ require 'config.php';
             <input type="text"  name="password" placeholder="Password">
             
             <input type="submit">
-            <a>Register</a>
+            <a href="signup.php">Sign Up</a>
             <a>Forgot Password</a>
           </form>
         </div>

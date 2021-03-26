@@ -8,14 +8,15 @@ if(!isset($_GET['id'])) {
 if(isset($_GET['id'])) {
     $sql = 'SELECT * FROM products WHERE id = ' . $_GET['id'];
     $query = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($query);
-    $id = $row['id'];
-    $name = $row['name'];
-    $price = $row['price'];
-    $description = $row['description'];
-    $targetdir = dirname(dirname(__FILE__)) . '/images/' . $id . '/*';
-    $images = glob($targetdir);
+    
     if (mysqli_num_rows($query) != 0) { // if id in database
+        $row = mysqli_fetch_array($query);
+        $id = $row['id'];
+        $name = $row['name'];
+        $price = $row['price'];
+        $description = $row['description'];
+        $targetdir = dirname(dirname(__FILE__)) . '/images/' . $id . '/*';
+        $images = glob($targetdir);
         // get all information and print
         $mainimageoutput = "";
         $thumbnailoutput = "";

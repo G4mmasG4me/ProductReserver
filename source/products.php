@@ -132,8 +132,8 @@ foreach($_GET as $key => $value) {
                         </form>
                     </div>
                     <ul class="navbar-nav w-100 justify-content-end align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="signin.php">Sign In</a></li>
+                        <li class="nav-item"><a class="nav-link" href="signup.php">Sign Up</a></li>
                     </ul>
                 </nav>
             </header>
@@ -172,56 +172,6 @@ foreach($_GET as $key => $value) {
                         </form>
                     </div>
                     <div id="products">
-                        <a href="" id="product">
-                            <div id="imgcontainer">
-                                <img src="https://via.placeholder.com/160x160?text=Product+Image">
-                            </div>
-                            <div id="productinfo">
-                                <h1>Product Name</h1>
-                                <p>Price</p>
-                                <p>Product Description</p>
-                            </div>
-                        </a>
-                        <a href="" id="product">
-                            <div id="imgcontainer">
-                                <img src="https://via.placeholder.com/160x160?text=Product+Image">
-                            </div>
-                            <div id="productinfo">
-                                <h1>Product Name</h1>
-                                <p>Price</p>
-                                <p>Product Description</p>
-                            </div>
-                        </a>
-                        <a href="" id="product">
-                            <div id="imgcontainer">
-                                <img src="https://via.placeholder.com/160x160?text=Product+Image">
-                            </div>
-                            <div id="productinfo">
-                                <h1>Product Name</h1>
-                                <p>Price</p>
-                                <p>Product Description</p>
-                            </div>
-                        </a>
-                        <a href="" id="product">
-                            <div id="imgcontainer">
-                                <img src="https://via.placeholder.com/160x160?text=Product+Image">
-                            </div>
-                            <div id="productinfo">
-                                <h1>Product Name</h1>
-                                <p>Price</p>
-                                <p>Product Description</p>
-                            </div>
-                        </a>
-                        <a href="" id="product">
-                            <div id="imgcontainer">
-                                <img src="https://via.placeholder.com/160x160?text=Product+Image">
-                            </div>
-                            <div id="productinfo">
-                                <h1>Product Name</h1>
-                                <p>Price</p>
-                                <p>Product Description</p>
-                            </div>
-                        </a>
                         <?php echo $output ?>
                     </div>
                 </div>
