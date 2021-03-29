@@ -48,7 +48,7 @@ if(isset($_POST['codesubmit'])) {
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 's', $_GET['id']);
     mysqli_stmt_execute($stmt);
-    header('Location: index.php');
+    header('Location: signin.php');
   }
   else {
     $error = "This is an incorrect code!";

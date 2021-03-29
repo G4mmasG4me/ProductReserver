@@ -5,7 +5,7 @@
           <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Newsletter</a></li>
           <li class="nav-item"><a class="nav-link" href="#">News</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li> <!-- if not signed in direct to login page, if signed in direct to account page -->
           <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
       </ul>
   </nav>

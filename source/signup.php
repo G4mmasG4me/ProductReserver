@@ -2,7 +2,22 @@
 
 require 'config.php';
 
+session_start();
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+}
+else {
+  header('Location: index.php');
+}
+
 $emailerror = '';
+$emailerr = '';
+$nameerror = '';
+$namerr = '';
+$passworderror = '';
+$passworderr = '';
+$confirmerror = '';
+$confirmerr = '';
 
 $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 $charlength = strlen($characters);
@@ -32,7 +47,7 @@ if(isset($_POST['signupsubmit'])) {
     $nameerror = False;
   }
   // Password Validation
-  if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/";)) {
+  if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/", $password)) {
     $passworderror = 'Invalid Password';
     $passworderr = True;
   }
@@ -51,22 +66,19 @@ if(isset($_POST['signupsubmit'])) {
 
 
   // search for email is db
-  $sql = 'SELECT 1 FROM users WHERE email = ? ';
+  $sql = 'SELECT 1 FROM users WHERE email = ?';
   $stmt = mysqli_prepare($conn, $sql);
   mysqli_stmt_bind_param($stmt, 's', $email);
   mysqli_stmt_execute($stmt);
   $users_result = mysqli_stmt_get_result($stmt);
   
-  $sql = 'SELECT 1 FROM unverified_users WHERE email = ? ';
+  $sql = 'SELECT 1 FROM unverified_users WHERE email = ?';
   $stmt = mysqli_prepare($conn, $sql);
   mysqli_stmt_bind_param($stmt, 's', $email);
   mysqli_stmt_execute($stmt);
   $unverified_users_result = mysqli_stmt_get_result($stmt);
 
   if(mysqli_num_rows($users_result) == 0 && mysqli_num_rows($unverified_users_result) == 0 ) {
-    
-    
-
     // hash and salt password
     $password = password_hash($password, PASSWORD_ARGON2ID);
 
@@ -100,7 +112,6 @@ if(isset($_POST['signupsubmit'])) {
   else {
     $emailerror = 'Email already in use';
   }
-  
 }
 
 ?>
@@ -134,5 +145,4 @@ if(isset($_POST['signupsubmit'])) {
           </form>
         </div>
     </body>
-
 </html>
