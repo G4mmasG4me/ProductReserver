@@ -41,7 +41,7 @@ html, body {
 #main {
   position: relative;
   display: flex;
-  margin: auto 200px;
+  margin: auto;
 }
 
 #imagesection {

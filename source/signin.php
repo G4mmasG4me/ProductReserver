@@ -4,10 +4,11 @@ require 'config.php';
 
 session_start();
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+
+if(isset($_SESSION["signedin"]) && $_SESSION["signedin"] === true) {
+  header('Location: index.php');
 }
 else {
-  header('Location: index.php');
 }
 
 
@@ -29,7 +30,7 @@ if(isset($_POST['signinsubmit'])) {
     $user_data = mysqli_fetch_array($user);
     
     if(password_verify($password, $user_data['password'])) { //valid password
-      $_SESSION['loggedin'] = true;
+      $_SESSION['signedin'] = true;
       $_SESSION['id'] = $user_data['id'];
       header('Location: index.php');
     }

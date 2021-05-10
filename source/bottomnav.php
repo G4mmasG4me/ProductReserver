@@ -1,12 +1,12 @@
 <footer id="footer" class="w-100 bottom">
   <nav class="navbar justify-content-center w-100">
-      <ul class="navbar-nav w-100 justify-content-center align-items-center">
-          <li class="nav-item"><a class="nav-link" href="#">Company Name © 2021</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Privacy Policy</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Newsletter</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">News</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li> <!-- if not signed in direct to login page, if signed in direct to account page -->
-          <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
-      </ul>
+    <div class="navbar-nav w-10 align-items-center justify-content-center">
+      <button class="nav-item" onclick="location.href='admin.php'">Company Name © 2021</button>
+      <button class="nav-item" onclick="location.href='admin.php'">Privacy Policy</button>
+      <button class="nav-item" onclick="location.href='admin.php'">Newsletter</a></button>
+      <button class="nav-item" onclick="location.href='admin.php'">News</button>
+      <button class="nav-item" onclick="location.href='admin.php'">Contact Us</button> 
+      <button class="nav-item" onclick="location.href=<?php echo (isset($_SESSION['signedin']) && $_SESSION['signedin'] === true) ? '&#39;account.php&#39;' : '&#39;signin.php&#39;'; ?>">Account</button> <!-- if not signed in direct to login page, if signed in direct to account page -->
+    </div>
   </nav>
 </footer>

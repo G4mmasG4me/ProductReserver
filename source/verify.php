@@ -48,6 +48,7 @@ if(isset($_POST['codesubmit'])) {
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 's', $_GET['id']);
     mysqli_stmt_execute($stmt);
+    // add user to basket programming database
     header('Location: signin.php');
   }
   else {

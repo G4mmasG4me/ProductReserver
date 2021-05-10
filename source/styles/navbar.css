@@ -1,6 +1,6 @@
 /* Header */
 #header {
-  position: absolute;
+  position: relative;
 }
 
 #header img {
@@ -25,7 +25,7 @@
 
 /* Footer */
 #footer {
-  position: absolute;
+  position: relative;
 }
 
 
@@ -34,35 +34,62 @@
   position: relative;
   display: flex;
   flex-wrap: nowrap;
+  background-color: rgba(0,0,0,0.05);
 }
 
 .navbar-nav {
   display: flex;
   flex-direction: row;
+  position: relative;
   list-style: none;
 }
 
 .nav-item {
+  position: relative;
   padding: 10px;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: black;
+  height: 100%;
   font-size: 20px;
-  transition: 0.25s;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  background: none;
 }
 
-.nav-link:hover {
-  font-size: 24px;
+.nav-item:hover {
+  background-color: rgba(0,0,0,0.2);
+  cursor: pointer;
 }
 
-#searchform {
+.dropdown {
+  position: relative;
+  height: 100%;
+}
+
+.dropdown > .nav-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-content {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  background-color: rgba(0,0,0,0.05);
+}
+
+.dropdown:hover .dropdown-content {
   display: flex;
 }
 
-#searchbar {
-  width: 100%;
+.searchform {
+  display: flex;
+  width: 80%;
+}
+
+.searchbar {
   height: 40px;
   padding: 0px 10px;
   font-size: 20px;
@@ -73,7 +100,7 @@
   border-bottom-left-radius: 16px;
 }
 
-#selectbar {
+.selectbar {
   width: 100px;
   height: 40px;
   font-size: 20px;
@@ -81,7 +108,8 @@
   border-width: 1px;
 }
 
-#searchbutton {
+.searchbutton {
+  box-sizing: border-box;
   width: 80px;
   height: 40px;
   font-size: 20px;
@@ -93,12 +121,12 @@
   background-color: lime;
 }
 
-#searchbutton:active {
+.searchbutton:active {
   border-width: 2px;
   border-color: black;
 }
 
-#searchbutton:hover {
+.searchbutton:hover {
   background-color: lawngreen;
 }
 
@@ -116,4 +144,16 @@
 
 .align-items-center {
   align-items: center;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-grow-2 {
+  flex-grow: 2;
 }

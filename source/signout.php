@@ -1,7 +1,8 @@
 <?php
 session_start();
-unset($_SESSION["id"]);
-unset($_SESSION["name"]);
+unset($_SESSION['loggedin']);
+unset($_SESSION['id']);
+unset($_SESSION['name']);
 session_destroy();
-header("Location:login.php");
+header('Location:signin.php');
 ?>

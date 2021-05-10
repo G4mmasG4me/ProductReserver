@@ -114,29 +114,7 @@ foreach($_GET as $key => $value) {
     <body>
         <div id="container">
             <!-- Top Navbar -->
-            <header class="w-100 top" id="header">
-                <nav class="navbar justify-content-center w-100">
-                    <ul class="navbar-nav w-100 justify-content-start align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="index.php"><img src="https://via.placeholder.com/160x40?text=Company+Name+Logo"></a></li>
-                    </ul>
-                    <div class="navbar-nav w-100 justify-content-center align-items-center">
-                        <form id="searchform" action="" method="get">
-                            <input id="searchbar" type="text" name="search" placeholder="Search.." value="<?php echo isset($_GET['search']) ? $_GET['search'] : '' ?>">
-                            <select id="selectbar" name="category">
-                                <option <?php if(isset($_GET['category']) and $_GET['category'] == 'All') { echo "selected = 'selected'"; } ?>>All</option>
-                                <option <?php if(isset($_GET['category']) and $_GET['category'] == 'Tech') { echo "selected = 'selected'"; } ?>>Tech</option>
-                                <option <?php if(isset($_GET['category']) and $_GET['category'] == 'Makeup') { echo "selected = 'selected'"; } ?>>Makeup</option>
-                            </select>
-                            <?php echo $searchhiddeninputs; ?>
-                            <input id="searchbutton" type="submit">
-                        </form>
-                    </div>
-                    <ul class="navbar-nav w-100 justify-content-end align-items-center">
-                        <li class="nav-item"><a class="nav-link" href="signin.php">Sign In</a></li>
-                        <li class="nav-item"><a class="nav-link" href="signup.php">Sign Up</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include "shoptopnav.php"; ?>
             <div id="bodycontent">
                 <div id="filterpanel">
                     <h1>Filter Panel</h1>

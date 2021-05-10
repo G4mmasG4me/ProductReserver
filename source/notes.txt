@@ -8,3 +8,11 @@ saves that data to temporary database, gets assigned a key or ID && sends email 
 Takes them to verification page, with get parameter of that key or ID.
 Uses that get parameter to show data.
 Once user has enter the correct verification code, it uses the get parameter value to verify the record that the ID/key belongs to.
+
+
+for shopping cart 
+if they are logged in, store the shopping cart in a server
+if they aren't logged in, store the shopping cart in the browser
+if they have an existing browser shopping cart when logging in, append that to the server shopping cart
+
+each user has their own shoppping cart database

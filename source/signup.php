@@ -4,10 +4,10 @@ require 'config.php';
 
 session_start();
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+if(isset($_SESSION["signedin"]) && $_SESSION["signedin"] === true) {
+  header('Location: index.php');
 }
 else {
-  header('Location: index.php');
 }
 
 $emailerror = '';
