@@ -1,0 +1,17 @@
+shopping chart
+if logged in then save the cart into the database
+if not logged in then save the cart into the cookie. | saved as list [[product_id, quantity], [product_id, quantity]]
+
+
+denial of inventory bot
+
+for each user create their own accounts
+
+so if they want a playstation
+
+they create order
+
+amazon account gets made
+
+wait until ps becomes available
+buy on that account

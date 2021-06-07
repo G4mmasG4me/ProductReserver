@@ -35,6 +35,19 @@ if(isset($_GET['id'])) {
     }
 }
 
+if(isset($_POST['addtocart'])) {
+	if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) {
+		$current_cart = json_decode($_COOKIE['cart'], true);
+		print $current_cart;
+		$new_cart = array_push($current_cart, array($id, 1));
+		setcookie("cart", json_encode($new_cart), time() + (86400 * 30), "/"); // 86400 = 1 day
+	}
+	else {
+		$new_cart = array(array($id, 1));
+		setcookie("cart", json_encode($new_cart), time() + (86400 * 30), "/"); // 86400 = 1 day
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -76,8 +89,10 @@ if(isset($_GET['id'])) {
 
                 </div>
                 <div id="buysection">
-                    <button>Buy</button>
-                    <button>Add to Basket</button>
+                    <form method="post" action="product.php?id=<?php echo $id; ?>">
+                        <input type="submit" name="buy" value="Buy">
+                        <input type="submit" name="addtocart" value="Add To Cart">
+                    </form>
                 </div>
 
             </div>

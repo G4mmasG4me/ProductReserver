@@ -32,6 +32,8 @@ if(isset($_POST['signinsubmit'])) {
     if(password_verify($password, $user_data['password'])) { //valid password
       $_SESSION['signedin'] = true;
       $_SESSION['id'] = $user_data['id'];
+      // add browser cart to database
+      // delete browser cart
       header('Location: index.php');
     }
     else {
