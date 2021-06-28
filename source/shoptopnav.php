@@ -1,7 +1,7 @@
 <header id="header" class="w-100 top">
   <nav class="navbar justify-content-center w-100">
     <div class="navbar-nav align-items-center justify-content-start flex-grow-1">
-      <button class="nav-item" onclick="location.href='admin.php'"><img src="https://via.placeholder.com/160x40?text=Company+Name+Logo"></button>
+      <button class="nav-item" onclick="location.href='index.php'"><img src="https://via.placeholder.com/160x40?text=Company+Name+Logo"></button>
     </div>
     <div class="navbar-nav align-items-center justify-content-center flex-grow-2">
       <form class="searchform" action="products.php" method="get">
@@ -23,8 +23,9 @@
         <div class="dropdown">
           <button class="nav-item" onclick="location.href=&#39;signup.php&#39;"><img src="https://via.placeholder.com/40">&nbsp;<p>Profile</p></button>
           <div class="dropdown-content">
-            <button class="nav-item" onclick="location.href=&#39;signup.php&#39;">Settings</button>
+            <button class="nav-item" onclick="location.href=&#39;signup.php&#39;">Orders</button>
             <button class="nav-item" onclick="location.href=&#39;signup.php&#39;">Account</button>
+            <button class="nav-item" onclick="location.href=&#39;signout.php&#39;">Sign Out</button>
           </div>
         </div>
         ';

@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+
 require 'config.php';
 
 if(!isset($_GET['id'])) {
@@ -35,16 +37,26 @@ if(isset($_GET['id'])) {
     }
 }
 
-if(isset($_POST['addtocart'])) {
-	if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) {
-		$current_cart = json_decode($_COOKIE['cart'], true);
-		print $current_cart;
-		$new_cart = array_push($current_cart, array($id, 1));
-		setcookie("cart", json_encode($new_cart), time() + (86400 * 30), "/"); // 86400 = 1 day
+if(isset($_POST['addtocart'])) { // if add to cart button pressed
+  if(isset($_SESSION['signedin']) && $_SESSION['signedin']) { // if logged in
+		$user_id = $_SESSION['id'];
+		$product_id = $_GET['id'];
+		$quantity = 1;
+		$sql = 'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?,?,?)';
+		$stmt = mysqli_prepare($conn, $sql);
+		mysqli_stmt_bind_param($stmt, 'iii', $user_id, $product_id, $quantity);
+		mysqli_stmt_execute($stmt);
 	}
-	else {
-		$new_cart = array(array($id, 1));
-		setcookie("cart", json_encode($new_cart), time() + (86400 * 30), "/"); // 86400 = 1 day
+	else { // not logged in
+		if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) { // if cookie is not empty
+			$current_cart = json_decode($_COOKIE['cart'], true);
+			array_push($current_cart, array($id, 1));
+			setcookie("cart", json_encode($current_cart));
+		}
+		else { // cookie is empty
+			$new_cart = array(array($id, 1));
+			setcookie("cart", json_encode($new_cart));
+		}
 	}
 }
 

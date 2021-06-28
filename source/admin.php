@@ -8,12 +8,14 @@ if (isset($_POST['addproductsubmit'])) {
     $colour = $_POST['colour'];
     $size = $_POST['size'];
     $category = $_POST['category'];
-    $brand = $_POST['brand'];
+    $company = $_POST['brand'];
     $price = $_POST['price'];
     $link = $_POST['link'];
 
-    $sql = "INSERT INTO products (name, description, colour, size, category, brand, price, link, dateadded) VALUES ('" . $name . "', '" . $description . "', '" . $colour . "', '" . $size . "', '" . $category . "', '" . $brand . "', '" . $price . "', '" . $link . "', '" . date('Y-m-d H:i:s') . "')";
-    mysqli_query($conn, $sql);
+    $sql = 'INSERT INTO products (name, description, colour, size, category, company_id, price, link) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'; 
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'sssssiis', $name, $description, $colour, $size, $category, $company, $price, $link);
+    mysqli_stmt_execute($stmt);
     $id = mysqli_insert_id($conn);
     $targetdir = dirname(dirname(__FILE__)) . '/images/' . $id . '/';
     mkdir($targetdir);
@@ -23,9 +25,23 @@ if (isset($_POST['addproductsubmit'])) {
         $newfile = $targetdir . $i . '.' . $extension;
         move_uploaded_file($tempfile, $newfile);
     }
-
 }
+if (isset($_POST['editproductsubmit'])) {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $colour = $_POST['colour'];
+    $size = $_POST['size'];
+    $category = $_POST['category'];
+    $company = $_POST['brand'];
+    $price = $_POST['price'];
+    $link = $_POST['link'];
 
+    $sql = 'UPDATE products SET name=?, description=?, colour=?, size=?, category=?, company_id=?, price=?, link=? WHERE id=?';
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'sssssiisi', $name, $description, $colour, $size, $category, $company, $price, $link, $id);
+    mysqli_stmt_execute($stmt);
+}
 
 ?>
 
@@ -67,11 +83,12 @@ if (isset($_POST['addproductsubmit'])) {
                 <div id="page2">
                     <div id="innerpage">
                         <div id="topbar">
-                            <button id="add" onclick="addproductshow()">Add Product</button>
-                            <button id="edit" onclick="editproductshow()">Edit Product</button>
+                            <button id="add" onclick="p2AddProductShow(this)">Add Product</button>
+                            <button id="edit" onclick="p2EditProductShow(this)">Edit Product</button>
+                            <button id="edit" onclick="p2SearchProductShow(this)">Search Product</button>
                         </div>
                         <div id="contentbar">
-                            <div id="add-content">
+                            <div id="p2add-content">
                                 <h1>Add Product</h1>
                                 <form id="addproductform" action="" method="post" enctype="multipart/form-data">
                                     <table>
@@ -102,14 +119,40 @@ if (isset($_POST['addproductsubmit'])) {
                                 </form>
 
                             </div>
-                            <div id="edit-content">
+                            <div id="p2edit-content">
                                 <h1>Edit Content</h1>
+                                <p>Search For The Product Using It's ID</p>
+                                
+                                <form id="editproductform" action="" method="post" enctype="multipart/form-data">
+                                    <input id="productid" type="number" name="id" onchange="productSearchEdit(this.value)">
+                                </form>
+
+                            </div>
+                            <div id="p2search-content">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="page3">
+                    <div id="innerpage">
+                        <div id="topbar">
+                            <button id="edit" onclick="p3EditProductShow(this)">Edit Product</button>
+                            <button id="edit" onclick="p3SearchProductShow(this)">Search Product</button>
+                        </div>
+                        <div id="contentbar">
+                            <div id="p3edit-content">
+                                <h1>Edit Content</h1>
+                                <p>Search For The Product Using It's ID</p>
+                                
+                                <form id="editcustomerform" action="" method="post" enctype="multipart/form-data">
+                                    <input id="customerid" type="number" name="id" onchange="userSearchEdit(this.value)">
+                                </form>
 
+                            </div>
+                            <div id="p3search-content">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="page4">
 

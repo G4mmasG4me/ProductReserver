@@ -33,7 +33,21 @@ if(isset($_POST['signinsubmit'])) {
       $_SESSION['signedin'] = true;
       $_SESSION['id'] = $user_data['id'];
       // add browser cart to database
-      // delete browser cart
+      // create a list of browser cart
+      // loop through browser cart list
+
+      // way 1
+      // check if user_id and product_id already in db
+      // if already in db, then add to quantity
+      // if not in db, then insert cart item in db
+
+      // way2
+      // check if user_id and product_id already in db
+      // if already in db, then add sql command to add to quantity
+      // if not in db, then add sql command to insert cart item into db
+      // once looped through all in cart
+      // execute final sql command
+
       header('Location: index.php');
     }
     else {

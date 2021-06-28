@@ -39,10 +39,9 @@ if(isset($_POST['codesubmit'])) {
     $last_name = implode(' ', $name);
     $email = $row['email'];
     $password = $row['password'];
-    $date = date('Y-m-d H:i:s');
-    $sql = 'INSERT INTO users (first_name, last_name, email, password, dateadded) VALUES (?,?,?,?,?)';
+    $sql = 'INSERT INTO users (first_name, last_name, email, password) VALUES (?,?,?,?)';
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssss', $first_name, $last_name, $email, $password, $date);
+    mysqli_stmt_bind_param($stmt, 'sssss', $first_name, $last_name, $email, $password);
     mysqli_stmt_execute($stmt);
     $sql = 'DELETE FROM unverified_users WHERE id = ?';
     $stmt = mysqli_prepare($conn, $sql);

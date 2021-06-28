@@ -1,59 +1,91 @@
 <?php 
 
+/* cart item
+<div class="item">
+  <div class="image">
+    <img class="productimg" src="https://via.placeholder.com/160x160">
+  </div>
+  <div class="proddetails">
+    <div class="leftside">
+      <p>Product Name</p>
+      <p>Quantity</p>
+    </div>
+    <div class="rightside">
+      <p>Price</p>
+    </div>
+  </div>
+</div>
+
+
+<div id="emptycart">
+  <p1 id="emptycartext">Your Cart Is Empty!</p1>
+  <button id="productsbutton">Check Out More Products Here</button>
+</div>
+*/
+
+
+
 require 'config.php';
 
 session_start();
 
 if(isset($_SESSION['signedin']) && $_SESSION['signedin']) { // if signed in get cart from database
-  $sql = 'SELECT * FROM cart_items WHERE user_id = ?';
+  // get all cart items where the user id equals current user id
+  /*
+  $sql = 'SELECT product_id FROM cart_items WHERE user_id = ?';
   $stmt = mysqli_prepare($conn, $sql);
-  mysqli_stmt_bind_param($stmt, 'i', $_SESSION['id']);
+  mysqli_stmt_bind_param($stmt, 's', $_SESSION['id']);
   mysqli_stmt_execute($stmt);
-  $db_cart = mysqli_stmt_get_result($stmt);
-
-  if(mysqli_num_rows($db_cart) != 0) { // if cart not empty
-    while($row = $db_cart) {
-      $sql = 'SELECT * FROM products WHERE id = ?';
-      $stmt = mysqli_prepare($conn, $sql);
-      mysqli_stmt_bind_param($stmt, 's', $row['product_id']);
-      mysqli_stmt_execute($stmt);
-      $product = mysqli_stmt_get_result($stmt);
-      $name = $product['name'];
-      $price = $product['price'];
-      $description = $product['description'];
-      #$manufacturer = $product['manufacturer'];
-      #$image = 'images/' . $row['product_id'] . '.png';
-    }
-
-  }
-}
-else { // if not signed in get cart from browser
-  // if browser cart not empty
-  if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) {
-    foreach($_COOKIE['cart'] as $product) {
-      $product_id = $product[0];
-      $product_quantity = $product[1];
+  $cart = mysqli_stmt_get_result($stmt);
+  */
+  $sql = 'SELECT * FROM cart_items WHERE user_id = ' . $_SESSION['id'];
+  $query = mysqli_query($conn, $sql);
+  if(mysqli_num_rows($query) != 0) { // if cart not empty
+    $cart_output = '';
+    while($cart_item = mysqli_fetch_array($query)) {
+      $product_id = $cart_item['product_id'];
       $sql = 'SELECT * FROM products WHERE id = ?';
       $stmt = mysqli_prepare($conn, $sql);
       mysqli_stmt_bind_param($stmt, 's', $product_id);
       mysqli_stmt_execute($stmt);
       $product = mysqli_stmt_get_result($stmt);
+      $product = mysqli_fetch_array($product);
       $name = $product['name'];
       $price = $product['price'];
       $description = $product['description'];
-
-      $cart .= '<div class="item"><div class="image"><img class="productimg" src="https://via.placeholder.com/160x160"></div><div class="proddetails"><div class="leftside"><p>'.$name.'</p><p>'.$product_quantity.'</p></div><div class="rightside"><p>'.$price.'</p></div></div></div>';
+      $cart_output .= '<div class="item"><div class="image"><img class="productimg" src="https://via.placeholder.com/160x160"></div><div class="proddetails"><div class="leftside"><p>'.$name.'</p><p></p></div><div class="rightside"><p>£'.$price.'</p></div></div></div>';
+    }
+  }
+  else {
+    $cart_output = "Cart Empty";
+  }
+}
+else { // if not signed in get cart from browser
+  // if browser cart not empty
+  if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) {
+    $cart = json_decode($_COOKIE['cart'], true);
+    $cart_output = "";
+    foreach($cart as $prod) {
+      $product_id = $prod[0];
+      $product_quantity = $prod[1];
+      $sql = 'SELECT * FROM products WHERE id = ?';
+      $stmt = mysqli_prepare($conn, $sql);
+      mysqli_stmt_bind_param($stmt, 's', $product_id);
+      mysqli_stmt_execute($stmt);
+      $product = mysqli_stmt_get_result($stmt);
+      $product = mysqli_fetch_array($product);
+      $name = $product['name'];
+      $price = $product['price'];
+      $description = $product['description'];
+      $cart_output .= '<div class="item"><div class="image"><img class="productimg" src="https://via.placeholder.com/160x160"></div><div class="proddetails"><div class="leftside"><p>'.$name.'</p><p>'.$product_quantity.'</p></div><div class="rightside"><p>'.$price.'</p></div></div></div>';
     }
   }
   // if browser cart empty
   else {
-    $cart = "Cart Empty";
+    $cart_output = '<div id="emptycart"><p1 id="emptycartext">Your Cart Is Empty!</p1><form id="emptycartform" action="products.php"><input type="submit" id="productsbutton" value="Check Out More Products Here!"></form></div>';
   }
   
 }
-
-
-// if not signed in get cart from browser
 
 
 ?>
@@ -78,36 +110,8 @@ else { // if not signed in get cart from browser
       <?php include "shoptopnav.php"; ?>
       <div id="bodycontent">
         <div id="cartmenu">
-          <div class="item">
-            <div class="image">
-              <img class="productimg" src="https://via.placeholder.com/160x160">
-            </div>
-            <div class="proddetails">
-              <div class="leftside">
-                <p>Product Name</p>
-                <p>Quantity</p>
-              </div>
-              <div class="rightside">
-                <p>Price</p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="image">
-              <img class="productimg" src="https://via.placeholder.com/160x160">
-            </div>
-            <div class="proddetails">
-              <div class="leftside">
-                <p>Product Name</p>
-                <p>Quantity</p>
-              </div>
-              <div class="rightside">
-                <p>Price</p>
-              </div>
-            </div>
-          </div>
+          <?php echo $cart_output ?>
         </div>
-        <?php echo $cart ?>
         <div id="buymenu">
           <p>Summary</p>
           <p>Total: </p>

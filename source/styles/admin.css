@@ -100,12 +100,19 @@ html, body {
   display: block;
   background-color: red;
 }
+
 #page2 {
   display: none;
   background-color: blue;
   align-items: center;
   justify-content: center;
+}
 
+#page3 {
+  display: none;
+  background-color: green;
+  align-items: center;
+  justify-content: center;
 }
 
 #innerpage {
@@ -120,12 +127,16 @@ html, body {
   border-radius: 10px;
 }
 
-#add-content {
+#p2add-content {
   display: block;
 }
 
-#edit-content {
+#p2edit-content {
   display: none;
+}
+
+#p3edit-content {
+  display: block;
 }
 
 #addproductsubmit {

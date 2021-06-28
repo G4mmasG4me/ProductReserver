@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="styles/navbar.css">
-    <link rel="stylesheet" type="text/css" href="styles/test.css">
-  </head>
-  <body>
-    <div id="container">
-      <!-- Top Navbar -->
-      <?php include "shoptopnav.php"; ?>
-      <div id="bodycontent">
-      </div>
-      <!-- Bottom Navbar -->
-      <?php include "bottomnav.php"; ?>
-    </div>
-  </body>
-</html>
+<?php 
+
+$array1 = array("orange", "apple");
+
+array_push($array1, "bannana");
+print_r($array1);
+?>

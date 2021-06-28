@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+
 $output = '';
 $order = '';
 $filter = '';
@@ -45,9 +47,8 @@ if(isset($_GET['search'])) {
   $searchq = $_GET['search'];
   $sql = 'SELECT * FROM products WHERE name LIKE ' . '"%' . $searchq . '%" ' . $filter;
   $query = mysqli_query($conn, $sql);
-  $count = mysqli_num_rows($query);
   
-  if($count == 0) {
+  if(mysqli_num_rows($query) == 0) {
     $output = 'There were no search results!';
     $_SESSION['output'] = $output;
   }

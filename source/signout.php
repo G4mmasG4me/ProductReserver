@@ -4,5 +4,5 @@ unset($_SESSION['loggedin']);
 unset($_SESSION['id']);
 unset($_SESSION['name']);
 session_destroy();
-header('Location:signin.php');
+header('Location:index.php');
 ?>

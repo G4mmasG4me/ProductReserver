@@ -39,12 +39,53 @@ function page(ele) {
   document.getElementById(ele.id.slice(0, 5)).style.display = 'flex';
 }
 
-function addproductshow() {
-  document.getElementById('add-content').style.display = "block"
-  document.getElementById('edit-content').style.display = "none";
+function p2AddProductShow() {
+  document.getElementById('p2add-content').style.display = "block"
+  document.getElementById('p2edit-content').style.display = "none";
+  document.getElementById('p2search-content').style.display = "none"
 }
 
-function editproductshow() {
-  document.getElementById('edit-content').style.display = "block"
-  document.getElementById('add-content').style.display = "none";
+function p2EditProductShow() {
+  document.getElementById('p2add-content').style.display = "none";
+  document.getElementById('p2edit-content').style.display = "block"
+  document.getElementById('p2search-content').style.display = "none"
+}
+
+function p2SearchProductShow() {
+  document.getElementById('p2add-content').style.display = "none";
+  document.getElementById('p2edit-content').style.display = "none";
+  document.getElementById('p2search-content').style.display = "block"
+}
+
+function p3EditProductShow() {
+  document.getElementById('p3edit-content').style.display = "block"
+  document.getElementById('p3search-content').style.display = "none"
+}
+
+function p3SearchProductShow() {
+  document.getElementById('p3edit-content').style.display = "none";
+  document.getElementById('p3search-content').style.display = "block"
+}
+function productSearchEdit(id) {
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('editproductform').innerHTML = this.responseText;
+    }
+  };
+  xhttp.open('GET', 'productSearch.php?id='+id,true);
+  xhttp.send();
+}
+
+function userSearchEdit(id) {
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('editcustomerform').innerHTML = this.responseText;
+    }
+  };
+  xhttp.open('GET', 'userSearch.php?id='+id,true);
+  xhttp.send();
 }

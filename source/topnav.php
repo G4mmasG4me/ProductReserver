@@ -19,6 +19,7 @@
           <div class="dropdown-content">
             <button class="nav-item" onclick="location.href=&#39;signup.php&#39;">Settings</button>
             <button class="nav-item" onclick="location.href=&#39;signup.php&#39;">Account</button>
+            <button class="nav-item" onclick="location.href=&#39;signout.php&#39;">Sign Out</button>
           </div>
         </div>
         ';

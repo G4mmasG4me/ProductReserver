@@ -66,45 +66,36 @@ if(isset($_POST['signupsubmit'])) {
 
 
   // search for email is db
-  $sql = 'SELECT 1 FROM users WHERE email = ?';
+  $sql = 'SELECT email FROM users WHERE email = ?';
   $stmt = mysqli_prepare($conn, $sql);
   mysqli_stmt_bind_param($stmt, 's', $email);
   mysqli_stmt_execute($stmt);
   $users_result = mysqli_stmt_get_result($stmt);
   
-  $sql = 'SELECT 1 FROM unverified_users WHERE email = ?';
+  $sql = 'SELECT email FROM unverified_users WHERE email = ?';
   $stmt = mysqli_prepare($conn, $sql);
   mysqli_stmt_bind_param($stmt, 's', $email);
   mysqli_stmt_execute($stmt);
   $unverified_users_result = mysqli_stmt_get_result($stmt);
 
-  if(mysqli_num_rows($users_result) == 0 && mysqli_num_rows($unverified_users_result) == 0 ) {
+  if(mysqli_num_rows($users_result) == 0 && mysqli_num_rows($unverified_users_result) == 0 ) { // if email not in database
     // hash and salt password
     $password = password_hash($password, PASSWORD_ARGON2ID);
 
-    // generates unique id string
-    $id = '';
-    for ($i = 0; $i < 8; $i++) {
-      $id .= $characters[rand(0, $charlength - 1)];
-    }
-    $id .= '-';
-    for ($i = 0; $i < 8; $i++) {
-      $id .= $characters[rand(0, $charlength - 1)];
-    }
-    $id .= '-';
-    for ($i = 0; $i < 8; $i++) {
-      $id .= $characters[rand(0, $charlength - 1)];
-    }
-    $id .= '-';
-    for ($i = 0; $i < 8; $i++) {
-      $id .= $characters[rand(0, $charlength - 1)];
-    }
     $code = rand(0000,9999);
     echo $code;
 
     //temporarily saves parameters and ID to a unverified user database
-    $sql = "INSERT INTO unverified_users (id, code, name, email, password, dateadded) VALUES ('" . $id . "', '" . $code . "','" . $name . "', '" . $email . "', '" . $password . "', '" . date('Y-m-d H:i:s') . "')";
-    mysqli_query($conn, $sql);
+    $sql = 'INSERT INTO unverified_users (code, name, email, password) VALUES (?, ?, ?, ?)';
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'ssss', $code, $name, $email, $password);
+    mysqli_stmt_execute($stmt);
+    $id = mysqli_insert_id($conn);
+
+    $subject = 'Product Resever Account Code';
+    $txt = 'Welcome to Product Reserver your account code is ' . $code;
+    $headers = 'From: productresever@hotmail.com\r\n';
+    mail($email,$subject,$txt,$headers);
 
     //direct them to verify page with key
     header('Location: verify.php?id=' . $id);
