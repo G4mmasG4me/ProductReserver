@@ -38,24 +38,48 @@ if(isset($_GET['id'])) {
 }
 
 if(isset($_POST['addtocart'])) { // if add to cart button pressed
-  if(isset($_SESSION['signedin']) && $_SESSION['signedin']) { // if logged in
+    $product_id = $_GET['id'];
+    $quantity = 1;
+    if(isset($_SESSION['signedin']) && $_SESSION['signedin']) { // if logged in
 		$user_id = $_SESSION['id'];
-		$product_id = $_GET['id'];
-		$quantity = 1;
-		$sql = 'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?,?,?)';
-		$stmt = mysqli_prepare($conn, $sql);
-		mysqli_stmt_bind_param($stmt, 'iii', $user_id, $product_id, $quantity);
-		mysqli_stmt_execute($stmt);
+
+        $sql = 'SELECT * FROM cart_items WHERE user_id = ? AND product_id = ?';
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, 'ii', $user_id, $product_id);
+        mysqli_execute($stmt);
+        $db_cart_item = mysqli_stmt_get_result($stmt); // get cart items that match user id and product id, of cookie cart.
+
+        if(mysqli_num_rows($db_cart_item) != 0) { // if item already in db cart
+            // add cookie quantity to cart quantity
+            $db_cart_item = mysqli_fetch_array($db_cart_item);
+            $sql = 'UPDATE cart_items SET quantity = ? WHERE id = ?';
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'ii', ($db_cart_item['quantity']+$quantity), $db_cart_item['id']);
+            mysqli_execute($stmt);
+        }
+        else { // if item not already in db
+            // add product to db cart
+            $sql = 'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?,?,?)';
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, 'iii', $user_id, $product_id, $quantity);
+            mysqli_execute($stmt);
+        }
+		
 	}
 	else { // not logged in
-		if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) { // if cookie is not empty
+		if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) { // if cookie exists and is not empty
 			$current_cart = json_decode($_COOKIE['cart'], true);
-			array_push($current_cart, array($id, 1));
-			setcookie("cart", json_encode($current_cart));
+            if(array_key_exists($product_id, $current_cart)) { // if item already in cart
+                $current_cart[$product_id] = $current_cart[$product_id] + $quantity;
+            }
+            else { // if item not in cart
+                $current_cart[$product_id] = $quantity;
+            }
+			setcookie("cart", json_encode($current_cart), time()+60*60*24*14); // 14 day expire time
 		}
 		else { // cookie is empty
-			$new_cart = array(array($id, 1));
-			setcookie("cart", json_encode($new_cart));
+			$new_cart = array($product_id => $quantity);
+			setcookie("cart", json_encode($new_cart), time()+60*60*24*14);
 		}
 	}
 }

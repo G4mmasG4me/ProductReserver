@@ -58,6 +58,9 @@ html, body {
 }
 
 .rightside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   width: 20%;
   padding: 5px;
 }

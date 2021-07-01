@@ -64,10 +64,8 @@ else { // if not signed in get cart from browser
   // if browser cart not empty
   if(isset($_COOKIE['cart']) && !empty($_COOKIE['cart'])) {
     $cart = json_decode($_COOKIE['cart'], true);
-    $cart_output = "";
-    foreach($cart as $prod) {
-      $product_id = $prod[0];
-      $product_quantity = $prod[1];
+    $cart_output = '';
+    foreach($cart as $product_id => $product_quantity) {
       $sql = 'SELECT * FROM products WHERE id = ?';
       $stmt = mysqli_prepare($conn, $sql);
       mysqli_stmt_bind_param($stmt, 's', $product_id);
@@ -77,7 +75,7 @@ else { // if not signed in get cart from browser
       $name = $product['name'];
       $price = $product['price'];
       $description = $product['description'];
-      $cart_output .= '<div class="item"><div class="image"><img class="productimg" src="https://via.placeholder.com/160x160"></div><div class="proddetails"><div class="leftside"><p>'.$name.'</p><p>'.$product_quantity.'</p></div><div class="rightside"><p>'.$price.'</p></div></div></div>';
+      $cart_output .= '<div class="item"><div class="image"><img class="productimg" src="https://via.placeholder.com/160x160"></div><div class="proddetails"><div class="leftside"><p>'.$name.'</p><p>'.$product_quantity.'</p></div><div class="rightside"><p>£'.$price.'</p></div></div></div>';
     }
   }
   // if browser cart empty
@@ -111,6 +109,36 @@ else { // if not signed in get cart from browser
       <div id="bodycontent">
         <div id="cartmenu">
           <?php echo $cart_output ?>
+          <div class="item">
+            <div class="image">
+              <img class="productimg" src="https://via.placeholder.com/160x160">
+            </div>
+            <div class="proddetails">
+              <div class="leftside">
+                <p>Product Name</p>
+              </div>
+              <div class="rightside">
+                <p>£10</p>
+                <div id="quantitySelector">
+                  <select id="quantitySelect" name="quantity" onchange="quantityChange(this)">
+                    <option value="1">Quantity: 1</option>
+                    <option value="2">Quantity: 2</option>
+                    <option value="3">Quantity: 3</option>
+                    <option value="4">Quantity: 4</option>
+                    <option value="5">Quantity: 5</option>
+                    <option value="6">Quantity: 6</option>
+                    <option value="7">Quantity: 7</option>
+                    <option value="8">Quantity: 8</option>
+                    <option value="9">Quantity: 9</option>
+                    <option value="10+">Quantity: 10+</option>
+                  </select>
+                </div>
+                <form id="removeitemform" action="" method="post">
+                  <input type="submit">Remove</input>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="buymenu">
           <p>Summary</p>
