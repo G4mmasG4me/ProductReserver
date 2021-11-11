@@ -120,6 +120,8 @@ section {
 /* Product Displays */
 #productrow {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #product {
@@ -155,4 +157,11 @@ section {
   font-family: "Trebuchet MS", sans-serif;
   font-weight: normal;
   text-align: center
+}
+
+
+@media screen and (max-width: 1000px) {
+  #productrow a:nth-last-child(-n+4) {
+    display: none;   
+  }
 }

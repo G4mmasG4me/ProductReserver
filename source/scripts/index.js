@@ -1,3 +1,4 @@
+updateCounter()
 setInterval(function(){
   updateCounter()
 }, 5000);

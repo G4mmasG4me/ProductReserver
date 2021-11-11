@@ -1,1 +1,7 @@
-ErrorDocument 404 /ProductReserver/source/404.php
+ErrorDocument 403 /ProductReserver/source/error.php
+ErrorDocument 404 /ProductReserver/source/error.php
+ErrorDocument 405 /ProductReserver/source/error.php
+ErrorDocument 408 /ProductReserver/source/error.php
+ErrorDocument 500 /ProductReserver/source/error.php
+ErrorDocument 502 /ProductReserver/source/error.php
+ErrorDocument 504 /ProductReserver/source/error.php

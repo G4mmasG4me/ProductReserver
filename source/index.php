@@ -16,10 +16,17 @@ while($row = mysqli_fetch_array($result)) {
 	$price = $row['price'];
 	$targetdir = dirname(dirname(__FILE__)) . '/images/' . $id . '/*';
 	$images = glob($targetdir);
-	$imagename = basename($images[0]);
-	$imagepath = '../images/'.$id.'/'.$imagename;
-	$recent_products .= '<a href="#" id="product"><img id="productimg" src="' . $imagepath . '"><div id="productinfo"><p>'. $name . ' - £' . $price .'</p></div></a>';
+	if (!empty($images)) {
+		$imagename = basename($images[0]);
+		$imagepath = '../images/'.$id.'/'.$imagename;
+		$recent_products .= '<a href="#" id="product"><img id="productimg" src="' . $imagepath . '"><div id="productinfo"><p>'. $name . ' - £' . $price .'</p></div></a>';
+	}
+	else {
+		// header('Location: error.php?error=404');
+	}
 }
+
+$sql = 'SELECT product_id FROM orders GROUP BY product_id ORDER BY COUNT(product_id) DESC LIMIT 5';
 
 ?>
 
@@ -58,7 +65,7 @@ while($row = mysqli_fetch_array($result)) {
 		<div id="container">
 			<section id="section1">
 				<!-- Top Navbar -->
-				<?php include "topnav.php"; ?>
+				<?php include "topnav2.php"; ?>
 				<div id="sec1div">
 					<h1>Business Name</h1>
 					<p>Description : Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
@@ -120,7 +127,7 @@ while($row = mysqli_fetch_array($result)) {
 					</div>
 				</div>
 				<!-- Bottom Navbar -->
-				<?php include "bottomnav.php"; ?>
+				<?php include "bottomnav2.php"; ?>
 			</section>
 		</div>
 	</body>

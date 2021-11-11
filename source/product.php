@@ -9,9 +9,11 @@ if(!isset($_GET['id'])) {
 }
 if(isset($_GET['id'])) {
 	$sql = 'SELECT * FROM products WHERE id = ' . $_GET['id'];
-	$query = mysqli_query($conn, $sql);
+	$stmt = mysqli_prepare($conn, $sql);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
 	
-	if (mysqli_num_rows($query) != 0) { // if id in database
+	if (mysqli_num_rows($result) != 0) { // if id in database
 		$row = mysqli_fetch_array($query);
 		$id = $row['id'];
 		$name = $row['name'];
@@ -46,7 +48,7 @@ if(isset($_POST['addtocart'])) { // if add to cart button pressed
 		$sql = 'SELECT * FROM cart_items WHERE user_id = ? AND product_id = ?';
 		$stmt = mysqli_prepare($conn, $sql);
 		mysqli_stmt_bind_param($stmt, 'ii', $user_id, $product_id);
-		mysqli_execute($stmt);
+		mysqli_stmt_execute($stmt);
 		$db_cart_item = mysqli_stmt_get_result($stmt); // get cart items that match user id and product id, of cookie cart.
 
 		if(mysqli_num_rows($db_cart_item) != 0) { // if item already in db cart
@@ -55,14 +57,14 @@ if(isset($_POST['addtocart'])) { // if add to cart button pressed
 				$sql = 'UPDATE cart_items SET quantity = ? WHERE id = ?';
 				$stmt = mysqli_prepare($conn, $sql);
 				mysqli_stmt_bind_param($stmt, 'ii', ($db_cart_item['quantity']+$quantity), $db_cart_item['id']);
-				mysqli_execute($stmt);
+				mysqli_stmt_execute($stmt);
 		}
 		else { // if item not already in db
 			// add product to db cart
 			$sql = 'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?,?,?)';
 			$stmt = mysqli_prepare($conn, $sql);
 			mysqli_stmt_bind_param($stmt, 'iii', $user_id, $product_id, $quantity);
-			mysqli_execute($stmt);
+			mysqli_stmt_execute($stmt);
 		}
 		
 	}
