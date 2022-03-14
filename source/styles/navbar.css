@@ -1,3 +1,8 @@
+:root {
+  --navbar-height: 50px;
+  --nav-link-height: 80%;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -6,22 +11,8 @@
   border: 0;
   list-style-type: none;
   text-decoration: none;
-  font-style: Arial;
+  font-family: Arial;
   font-size: 16px;
-}
-
-html, body {
-  min-height: 100vh;
-}
-
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.content {
-  flex-grow: 1;
 }
 
 .mobile-navbar {
@@ -34,6 +25,7 @@ html, body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: var(--navbar-height);
 }
 
 .navbar-dropdown-active {
@@ -42,31 +34,42 @@ html, body {
 
 .nav-section {
   width: 100%;
+  height: 100%;
 }
 
 .nav-section > ul {
   display: flex;
   flex-direction: row;
+  height: 100%;
+}
+
+.nav-section ul {
+  height: 100%;
 }
 
 .nav-item {
   display: flex;
-  margin: 4px;
+  align-items: center;
+  height: 100%;
+  margin: 0 4px;
 }
 
 .nav-link {
+  height: 80%;
+  display: flex;
+  align-items: center;
   background-color: #dddddd;
-  padding: 8px;
   border-radius: 8px;
   text-align: center;
   color: black;
+  padding: 0 1vw;
 }
 
 .nav-icon {
-  padding: 0px;
   background-color: transparent;
   border-radius: 0;
 }
+
 .nav-link:hover {
   background-color: #aaaaaa;
   cursor: pointer;
@@ -75,15 +78,26 @@ html, body {
 .justify-left {
   justify-content: flex-start;
 }
+
 .justify-center {
   justify-content: center;
 }
+
 .justify-right {
   justify-content: flex-end;
 }
 
+/* dropdown styling */
+
+.nav-dropdown {
+  height: 100%;
+}
 .nav-dropdown > ul {
   position: relative;
+}
+
+.nav-dropdown .nav-link {
+  white-space: nowrap;
 }
 
 .nav-dropdown-content {
@@ -96,13 +110,21 @@ html, body {
   flex-direction: column;
 }
 
-.nav-dropdown .nav-link {
-  white-space: nowrap;
+.nav-dropdown-content .nav-item {
+  height: var(--navbar-height);
+  
 }
-
 .nav-dropdown-content .nav-link {
   position: relative;
 }
+
+.profile_icon {
+  height: 80%;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Dropdown sections depending on where the dropdown is */
 .justify-left .nav-dropdown-content {
   left: 0;
   right: auto;
@@ -120,11 +142,14 @@ html, body {
   right: 0;
   left: auto;
 }
+
 .justify-right .nav-dropdown-content .nav-item {
   justify-content: end;
 }
 
-/* devices with a width lower than 1001px */
+
+/* start of devices with a width lower than 1001px */
+
 @media screen and (max-width: 1000px) {
   .mobile-dropdown {
     display: none;
@@ -163,11 +188,21 @@ html, body {
   }
 }
 
+/* end of devices with a width lower than 1000px */
+
+
+/* start of devies with a width higher than 1000px */
+
 @media screen and (min-width: 1001px) {
   .nav-dropdown:hover .nav-dropdown-content {
     display: flex;
   }
 }
+
+/* end of devices with a width higher than 1000px */
+
+
+/* start of footer styles */
 
 .footer-navigation {
   display: flex;
@@ -186,3 +221,5 @@ html, body {
   vertical-align: middle;
   border-radius: 25%;
 }
+
+ /* end of footer styles */

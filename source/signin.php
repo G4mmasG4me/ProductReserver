@@ -4,11 +4,9 @@ require 'config.php';
 
 session_start();
 
-
+// if they are logged in, redirects to homepage, as they don't need to login again
 if(isset($_SESSION["signedin"]) && $_SESSION["signedin"] === true) {
 	header('Location: index.php');
-}
-else {
 }
 
 
@@ -16,6 +14,7 @@ $emailerror = '';
 $passworderror = '';
 $loginerror = '';
 
+// on sign in button pressed
 if(isset($_POST['signinsubmit'])) {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
@@ -29,19 +28,20 @@ if(isset($_POST['signinsubmit'])) {
 	if(mysqli_num_rows($user) != 0) {
 		$user_data = mysqli_fetch_array($user);
 		
-		if(password_verify($password, $user_data['password'])) { //valid password
+		if(password_verify($password, $user_data['password'])) { // if valid password and email
 			$_SESSION['signedin'] = true;
 			$_SESSION['id'] = $user_data['id'];
 			// add browser cart to database
 
 			// create a list of browser cart
 			$cart = json_decode($_COOKIE['cart'], true);
-			// loop through browser cart list
+
+			// loop through cookie cart list
 			foreach($cart as $prod) {
 				$sql = 'SELECT * FROM cart_items WHERE user_id = ? AND product_id = ?';
 				$stmt = mysqli_prepare($conn, $sql);
 				mysqli_stmt_bind_param($stmt, 'ii', $user_data['id'], $prod[0]);
-				mysqli_execute($stmt);
+				mysqli_stmt_execute($stmt);
 				$db_cart_item = mysqli_stmt_get_result($stmt); // get cart items that match user id and product id, of cookie cart.
 				if(mysqli_num_rows($db_cart_item) != 0) { // if item already in db cart
 					// add cookie quantity to cart quantity
@@ -49,18 +49,18 @@ if(isset($_POST['signinsubmit'])) {
 					$sql = 'UPDATE cart_items SET quantity = ? WHERE id = ?';
 					$stmt = mysqli_prepare($conn, $sql);
 					mysqli_stmt_bind_param($stmt, 'ii', ($db_cart_item['quantity']+$prod[1]), $db_cart_item['id']);
-					mysqli_execute($stmt);
+					mysqli_stmt_execute($stmt);
 				}
-				else { // if item not already in db
+				else { // if item not already in db cart
 					// add product to db cart
 					$sql = 'INSERT INTO cart_items (user_id, product_id, quantity) VALUES (?,?,?)';
 					$stmt = mysqli_prepare($conn, $sql);
 					mysqli_stmt_bind_param($stmt, 'iii', $user_data['id'], $prod[0], $prod[1]);
-					mysqli_execute($stmt);
+					mysqli_stmt_execute($stmt);
 				}
-			// wipe cookie cart
-			setcoookie('cart', '', time()-3600);
 			}
+			// once cookie cart has been transferred to database cart, cookie cart can be cleared because it's no longer needed
+			setcookie('cart', '', time()-3600);
 			
 
 			// way 1
@@ -75,9 +75,10 @@ if(isset($_POST['signinsubmit'])) {
 			// once looped through all in cart
 			// execute final sql command
 
+			// redirect to homepage upon successful login
 			header('Location: index.php');
 		}
-		else {
+		else { // if login failed i.e. wrong email or password
 			$loginerror = 'Login Failed: Wrong Email or Password';
 		}
 	}

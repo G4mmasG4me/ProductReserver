@@ -1,12 +1,23 @@
-<footer id="footer" class="w-100 bottom">
-	<nav class="navbar justify-content-center w-100">
-		<div class="navbar-nav w-10 align-items-center justify-content-center">
-			<button class="nav-item" onclick="location.href='admin.php'">Company Name © 2021</button>
-			<button class="nav-item" onclick="location.href='admin.php'">Privacy Policy</button>
-			<button class="nav-item" onclick="location.href='admin.php'">Newsletter</a></button>
-			<button class="nav-item" onclick="location.href='admin.php'">News</button>
-			<button class="nav-item" onclick="location.href='admin.php'">Contact Us</button> 
-			<button class="nav-item" onclick="location.href=<?php echo (isset($_SESSION['signedin']) && $_SESSION['signedin'] === true) ? '&#39;account.php&#39;' : '&#39;signin.php&#39;'; ?>">Account</button> <!-- if not signed in direct to login page, if signed in direct to account page -->
-		</div>
-	</nav>
+<footer>
+  <nav>
+    <ul class="footer-navigation">
+      <li>
+        <ul>
+          <li class="nav-item"><a class="nav-icon" href=""><img class="social-icon" src="../images/static_images/social_media_logos/instagram/instagram_32.png"></a></li>
+          <li class="nav-item"><a class="nav-icon" href=""><img class="social-icon" src="../images/static_images/social_media_logos/twitter/twitter_full/twitter_32.png"></a></li>
+          <li class="nav-item"><a class="nav-icon" href=""><img class="social-icon" src="../images/static_images/social_media_logos/facebook/facebook_full/facebook_32.png"></a></li>
+          <li class="nav-item"><a class="nav-icon" href=""><img class="social-icon" src="../images/static_images/social_media_logos/youtube/youtube_32.png"></a></li>
+          <li class="nav-item"><a class="nav-icon" href=""><img class="social-icon" src="../images/static_images/social_media_logos/linkedin/linkedin_32.png"></a></li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li class="nav-item"><a class="nav-link" href="">Link 1</a></li>
+          <li class="nav-item"><a class="nav-link" href="">Link 2</a></li>
+          <li class="nav-item"><a class="nav-link" href="">Link 3</a></li>
+          <li class="nav-item"><a class="nav-link" href="">Link 4</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 </footer>

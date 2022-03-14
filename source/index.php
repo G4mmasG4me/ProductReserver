@@ -8,6 +8,7 @@ $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
+// get a list of recent products
 $recent_products = '';
 
 while($row = mysqli_fetch_array($result)) {
@@ -25,6 +26,8 @@ while($row = mysqli_fetch_array($result)) {
 		// header('Location: error.php?error=404');
 	}
 }
+
+// get a list of popular products
 
 $sql = 'SELECT product_id FROM orders GROUP BY product_id ORDER BY COUNT(product_id) DESC LIMIT 5';
 
@@ -59,13 +62,14 @@ $sql = 'SELECT product_id FROM orders GROUP BY product_id ORDER BY COUNT(product
 		<link rel="icon" href="http://via.placeholder.com/64x64">
 		
 		<script type="text/javascript" src="scripts/index.js"></script>
+		<script type="text/javascript" src="scripts/navbar.js"></script>
 	</head>
 
 	<body>
 		<div id="container">
 			<section id="section1">
 				<!-- Top Navbar -->
-				<?php include "topnav2.php"; ?>
+				<?php include "topnav.php"; ?>
 				<div id="sec1div">
 					<h1>Business Name</h1>
 					<p>Description : Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
@@ -83,38 +87,7 @@ $sql = 'SELECT product_id FROM orders GROUP BY product_id ORDER BY COUNT(product
 				<div id="sec3div">
 					<h1>Popular Products</h1>
 					<div id="productrow">
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
-						<a href="#" id="product">
-							<img id="productimg" src="https://via.placeholder.com/160x160?text=Product+Img">
-							<div id="productinfo"><p>Product - £00.00</p></div>
-						</a>
+						<?php echo $popular_products; ?>
 					</div>
 				</div>
 			</section>
@@ -127,7 +100,7 @@ $sql = 'SELECT product_id FROM orders GROUP BY product_id ORDER BY COUNT(product
 					</div>
 				</div>
 				<!-- Bottom Navbar -->
-				<?php include "bottomnav2.php"; ?>
+				<?php include "bottomnav.php"; ?>
 			</section>
 		</div>
 	</body>
