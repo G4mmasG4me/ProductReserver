@@ -1,0 +1,9 @@
+checklist of things to do
+--- create 'launch' page ---
+- clock in center of it
+- information below
+
+- need to restructure all files to make them consistent, with things such as positions and how i lay out the navigation bars using certain things
+- rename css classes
+- make it more readable
+- add comments
