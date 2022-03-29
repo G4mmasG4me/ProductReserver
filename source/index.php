@@ -3,7 +3,7 @@ session_start();
 
 require 'config.php';
 
-$sql = 'SELECT * FROM products ORDER BY dateadded DESC LIMIT 5';
+$sql = 'SELECT * FROM product ORDER BY created_at DESC LIMIT 5';
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -13,7 +13,7 @@ $recent_products = '';
 
 while($row = mysqli_fetch_array($result)) {
 	$id = $row['id'];
-	$name = $row['name'];
+	$name = $row['product_name'];
 	$price = $row['price'];
 	$targetdir = dirname(dirname(__FILE__)) . '/images/' . $id . '/*';
 	$images = glob($targetdir);
@@ -22,15 +22,20 @@ while($row = mysqli_fetch_array($result)) {
 		$imagepath = '../images/'.$id.'/'.$imagename;
 		$recent_products .= '<a href="#" id="product"><img id="productimg" src="' . $imagepath . '"><div id="productinfo"><p>'. $name . ' - £' . $price .'</p></div></a>';
 	}
-	else {
+	else { // if no images
 		// header('Location: error.php?error=404');
 	}
 }
 
 // get a list of popular products
+$sql = 'SELECT product_id, count(id) FROM order_item WHERE (created_at >= DATE(NOW()) - INTERVAL 7 DAY) GROUP BY product_id ORDER BY count(id) DESC LIMIT 5;';
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_execute($stmt);
+$product_ids = mysqli_stmt_get_result($stmt);
+$product_ids = mysqli_fetch_all($product_ids, MYSQLI_NUM);
+$product_ids = array_column($product_ids, 0);
 
-$sql = 'SELECT product_id FROM orders GROUP BY product_id ORDER BY COUNT(product_id) DESC LIMIT 5';
-
+print_r($product_ids);
 ?>
 
 <!DOCTYPE html>

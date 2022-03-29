@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: 0;
+  border: 0;
+  list-style-type: none;
+  text-decoration: none;
+  font-style: Arial;
+}
+
+.animationText {
+  
+  transition: transform 0.5s ease-in-out 100ms;
+  display: inline-block;
+}
+
+.animationTextOpen {
+  transform: scale(1,1);
+}
+
+.animationTextClose {
+  transform: scale(0,1);
+}

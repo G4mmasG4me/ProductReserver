@@ -1,3 +1,3 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "productreserver");
+$conn = mysqli_connect("localhost", "root", "", "product_reserver");
 ?>
